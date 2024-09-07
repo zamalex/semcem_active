@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "123235642045",
+    "firebase_url": "https://sahl-supply-fc9f7-default-rtdb.firebaseio.com",
+    "project_id": "sahl-supply-fc9f7",
+    "storage_bucket": "sahl-supply-fc9f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123235642045:android:d263ed5a53b592bc30a5d4",
+        "android_client_info": {
+          "package_name": "com.sahlsupplyapp.marketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123235642045-689r7530nnoptlo1ea4m1p6mdm1qkmld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sahlsupplyapp.marketplace",
+            "certificate_hash": "ffaa76e1905efda0e3a2263d87c46adef3d2942e"
+          }
+        },
+        {
+          "client_id": "123235642045-fim0paor8hrt221sa19qr7s0tssq56rr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sahlsupplyapp.marketplace",
+            "certificate_hash": "1d8246afca6708388ab9bdfb55519031c4d4b9eb"
+          }
+        },
+        {
+          "client_id": "123235642045-gdu3nidn3q91hdl44lrd1tvf93s5jbqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sahlsupplyapp.marketplace",
+            "certificate_hash": "4b134e456587c51ccb26a6eccdd024ade7bcad3c"
+          }
+        },
+        {
+          "client_id": "123235642045-sc07vurln3pqsh781eanv5a0uce0otjp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sahlsupplyapp.marketplace",
+            "certificate_hash": "d087f0616fb1139bc19edc18f549f3dd3a1c1eb1"
+          }
+        },
+        {
+          "client_id": "123235642045-rhqj26cdn5ds48c84qdbqk83k4p05fva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm_ZEJZ58IDAn9IjtGr3a9Y0UKKjOcWI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123235642045-jtqbam6no82krd2atn7ogqh1kqd6mfgd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "123235642045-425h76s0tkd0gjr88jjifrkq4ae5aalf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sahl.supply"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
