@@ -18,7 +18,7 @@ class AppConfig {
   //configure this
   static const bool HTTPS = true;
 
-  static const DOMAIN_PATH = "commerce.b1rincitech.com"; //localhost
+  static const DOMAIN_PATH = "dev.semcem.com"; //localhost
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";

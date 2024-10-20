@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>620463100599-ach14i3qo4h3pbgsh57hj6c0pc0dnjgg.apps.googleusercontent.com</string>
+	<string>123235642045-ckkcuvfbokggve1fa8h1375gghpfvvfu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.620463100599-ach14i3qo4h3pbgsh57hj6c0pc0dnjgg</string>
+	<string>com.googleusercontent.apps.123235642045-ckkcuvfbokggve1fa8h1375gghpfvvfu</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>620463100599-6ugm9kpt4scqtr7hl4j35c0loe3mga6c.apps.googleusercontent.com</string>
+	<string>123235642045-689r7530nnoptlo1ea4m1p6mdm1qkmld.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string></string>
+	<string>AIzaSyCtm8wrDbkyLzcxHu2rmsSMS_9-b5nSgZg</string>
 	<key>GCM_SENDER_ID</key>
-	<string></string>
+	<string>123235642045</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.activeitzone.ecommerceapplesignup</string>
+	<string>com.sahlsupplyapp.marketplace</string>
 	<key>PROJECT_ID</key>
-	<string>testproject-43</string>
+	<string>sahl-supply-fc9f7</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testproject-43.appspot.com</string>
+	<string>sahl-supply-fc9f7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:620463100599:ios:736cbf21eb3a56fd253332</string>
+	<string>1:123235642045:ios:fd2abc11c6829f1f30a5d4</string>
+	<key>DATABASE_URL</key>
+	<string>https://sahl-supply-fc9f7-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

@@ -87,7 +87,9 @@ class _RegistrationState extends State<Registration> {
       ToastComponent.showDialog(AppLocalizations.of(context)!.enter_your_name,
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
-    } else if (_register_by == 'email' && (email == "" || !isEmail(email))) {
+    } else if (_register_by == 'email' &&
+        (email == "" || !isEmail(email.trim()))) {
+      email = email.trim();
       ToastComponent.showDialog(AppLocalizations.of(context)!.enter_email,
           gravity: Toast.center, duration: Toast.lengthLong);
       return;

@@ -904,7 +904,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: buildSettingAndAddonsHorizontalMenuItem(
                   "assets/notification.png",
-                  "Notifications",
+    LangText(context).local.notification_ucf,
                   is_logged_in.$
                       ? () {
                           Navigator.push(context,
@@ -980,7 +980,7 @@ class _ProfileState extends State<Profile> {
                   : () => null),
           buildSettingAndAddonsHorizontalMenuItem(
               "assets/download.png",
-              "Upload file",
+    LangText(context).local.upload_file_ucf,
               is_logged_in.$
                   ? () {
                       Navigator.push(context,

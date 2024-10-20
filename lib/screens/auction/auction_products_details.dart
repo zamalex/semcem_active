@@ -63,7 +63,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   Animation? _colorTween;
   late AnimationController _ColorAnimationController;
 
-  CarouselController _carouselController = CarouselController();
+  CarouselSliderController _carouselController = CarouselSliderController();
   late BuildContext loadingcontext;
 
   //init values
@@ -1214,7 +1214,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                         }
                         if (_auctionproductDetails.highestBid == '') {
                           if (double.parse(value) <
-                              double.parse(_auctionproductDetails.minBidPrice.toString())) {
+                              double.parse(_auctionproductDetails.minBidPrice
+                                  .toString())) {
                             return AppLocalizations.of(context)!
                                 .value_must_be_greater_or_equal;
                           }
@@ -1374,7 +1375,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             child: CountdownTimer(
               controller: countDownTimercontroller,
               endTime: DateTime.now().day +
-                  (1000 * int.parse(_auctionproductDetails.auctionEndDate.toString())),
+                  (1000 *
+                      int.parse(
+                          _auctionproductDetails.auctionEndDate.toString())),
               widgetBuilder: (_, CurrentRemainingTime? time) {
                 List _auctionEndTimeList = [];
                 _auctionEndTimeList
@@ -1767,7 +1770,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             width: 64,
             child: Scrollbar(
               controller: _imageScrollController,
-             // isAlwaysShown: false,
+              // isAlwaysShown: false,
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!

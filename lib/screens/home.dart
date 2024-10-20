@@ -14,6 +14,7 @@ import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 
 import '../custom/home_all_products_2.dart';
 import '../custom/home_banner_one.dart';
@@ -48,8 +49,25 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     // change();
     // TODO: implement initState
     super.initState();
+    checkUpdate();
   }
 
+  final newVersionPlus = NewVersionPlus();
+  checkUpdate() async{
+    final status = await newVersionPlus.getVersionStatus();
+    if(status!=null){
+ print('can update ${status!.canUpdate.toString()}'); // (true)
+  print('local version ${status!.localVersion.toString()}'); // (true)
+ print('store version ${status!.storeVersion.toString()}'); // (true)
+   
+    }
+   
+    Future.delayed(Duration.zero).then(
+      (value) {
+        newVersionPlus.showAlertIfNecessary(context: context);
+      },
+    );
+  }
   change() {
     homeData.onRefresh();
     homeData.mainScrollListener();

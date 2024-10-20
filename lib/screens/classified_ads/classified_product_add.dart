@@ -271,8 +271,9 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     // set intial value
     selectedCondition = itemList.first;
 
-    fetchAll();
-
+    Future.delayed(Duration.zero, () {
+      fetchAll();
+    });
     // TODO: implement initState
     super.initState();
   }

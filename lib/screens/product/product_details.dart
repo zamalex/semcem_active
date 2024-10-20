@@ -76,7 +76,7 @@ class _ProductDetailsState extends State<ProductDetails>
     ..enableZoom(false);
   double webViewHeight = 50.0;
 
-  CarouselController _carouselController = CarouselController();
+  CarouselSliderController _carouselController = CarouselSliderController();
   late BuildContext loadingcontext;
 
   //init values
@@ -930,7 +930,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           child: Center(
                             child: Icon(
                               Icons.favorite,
-                              color: _isInWishList??false
+                              color: _isInWishList ?? false
                                   ? Color.fromRGBO(230, 46, 4, 1)
                                   : MyTheme.dark_font_grey,
                               size: 16,

@@ -27,8 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.620463100599-ddb91en0ain1g4lim7ub25ced6lm6flr</string>
-				<string>fb</string>
+				<string>com.googleusercontent.apps.123235642045-ckkcuvfbokggve1fa8h1375gghpfvvfu</string>
 			</array>
 		</dict>
 	</array>
@@ -111,5 +110,7 @@
 	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+<string>This identifier will be used to deliver personalized ads to you.</string>
 </dict>
 </plist>

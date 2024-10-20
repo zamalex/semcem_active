@@ -8,6 +8,7 @@ import 'package:package_info/package_info.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -25,7 +26,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     //on Splash Screen hide statusbar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
     super.initState();
     _initPackageInfo();
   }
@@ -33,8 +35,8 @@ class _SplashState extends State<Splash> {
   @override
   void dispose() {
     //before going to other screen show statusbar
-    SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.dispose();
   }
 
@@ -46,10 +48,9 @@ class _SplashState extends State<Splash> {
   }
 
   Future<Widget> loadFromFuture() async {
-
     // <fetch data from server. ex. login>
 
-    return Future.value( Main());
+    return Future.value(Main());
   }
 
   @override
@@ -58,10 +59,8 @@ class _SplashState extends State<Splash> {
       //comment this
       seconds: 3,
 
-
       //comment this
       navigateAfterSeconds: Main(),
-
 
       //navigateAfterFuture: loadFromFuture(), //uncomment this
       title: Text(
@@ -295,7 +294,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+      textDirection:
+          app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         body: InkWell(
           onTap: widget.onClick,

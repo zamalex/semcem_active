@@ -10,8 +10,10 @@ import 'package:active_ecommerce_flutter/presenter/currency_presenter.dart';
 import 'package:active_ecommerce_flutter/providers/locale_provider.dart';
 import 'package:active_ecommerce_flutter/screens/index.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +47,12 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     _initPackageInfo();
+    initPermission();
+    // checkUpdate();
+  }
+
+  initPermission() async {
+    await AppTrackingTransparency.requestTrackingAuthorization();
   }
 
   @override
@@ -56,10 +64,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: DeviceInfo(context).height,
       height: DeviceInfo(context).height,
-      color:  MyTheme.splash_screen_color,
+      color: MyTheme.splash_screen_color,
       child: InkWell(
         child: Stack(
-
           // mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -75,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
               radius: 140.0,
             ),
             Positioned.fill(
-              top: DeviceInfo(context).height!/2-72,
+              top: DeviceInfo(context).height! / 2 - 72,
               child: Column(
                 children: [
                   Padding(
@@ -85,13 +92,13 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: Container(
                         height: 72,
                         width: 72,
-                        padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                         decoration: BoxDecoration(
-                          color: MyTheme.white,
-                          borderRadius: BorderRadius.circular(8)
-                        ),
+                            color: MyTheme.white,
+                            borderRadius: BorderRadius.circular(8)),
                         child: Image.asset(
-                            "assets/splash_screen_logo.png",
+                          "assets/splash_screen_logo.png",
                           filterQuality: FilterQuality.low,
                         ),
                       ),
@@ -110,17 +117,14 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     "V " + _packageInfo.version,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
-                        color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
             ),
-
-
-
             Positioned.fill(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -155,6 +159,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
-
 }
