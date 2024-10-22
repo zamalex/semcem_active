@@ -801,7 +801,7 @@ class _ProductDetailsState extends State<ProductDetails>
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
           extendBody: true,
-          bottomNavigationBar: buildBottomAppBar(context, _addedToCartSnackbar),
+          bottomNavigationBar:_productDetails==null?null:buildBottomAppBar(context, _addedToCartSnackbar),
           //appBar: buildAppBar(statusBarHeight, context),
           body: RefreshIndicator(
             color: MyTheme.accent_color,
@@ -2134,7 +2134,10 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
-    return BottomNavigationBar(
+    return _productDetails!.available!=1?Container(
+      padding: EdgeInsets.only(bottom: 10),
+        alignment: Alignment.bottomCenter,
+        child: Text('Item is not available in your country',style: TextStyle(color: Colors.red,fontSize: 18),)):BottomNavigationBar(
       backgroundColor: MyTheme.white.withOpacity(0.9),
       items: [
         BottomNavigationBarItem(

@@ -7,6 +7,7 @@ import 'package:active_ecommerce_flutter/custom/btn.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/intl_phone_input.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:active_ecommerce_flutter/data_model/address_response.dart';
 import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -30,8 +31,9 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:toast/toast.dart';
 import 'package:twitter_login/twitter_login.dart';
-
+import 'package:active_ecommerce_flutter/screens/address.dart' as aa;
 import '../../custom/loading.dart';
+import '../../main.dart';
 import '../../repositories/address_repository.dart';
 
 class Login extends StatefulWidget {
@@ -73,6 +75,13 @@ class _LoginState extends State<Login> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.dispose();
+  }
+
+
+  addSavedAddress(Address a){
+    AddressRepository().getAddressAddResponse(address: a.address??'', country_id: a.country_id??0, state_id: a.state_id??0, city_id: a.city_id??0, postal_code: a.postal_code??'000', phone: a.phone??'').then((value) {
+
+    },);
   }
 
   onPressedLogin() async {
@@ -117,8 +126,21 @@ class _LoginState extends State<Login> {
       ToastComponent.showDialog(loginResponse.message!,
           gravity: Toast.center, duration: Toast.lengthLong);
       AuthHelper().setUserData(loginResponse);
+
+      Address? a = await readAddress();
+      if(a!=null&&getEnableAddressFilter()){
+        addSavedAddress(a);
+      }
+
       // push notification starts
-      context.push("/");
+      //context.push("/");
+
+      if(getEnableAddressFilter())
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => aa.Address(from_first: true,),));
+      else
+        context.push("/");
+
+
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
         final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 

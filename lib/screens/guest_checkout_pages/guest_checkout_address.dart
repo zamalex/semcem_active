@@ -44,6 +44,38 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
   Country? _selected_country;
   MyState? _selected_state;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    if(appDefaultAddress!=null){
+      _addressController.text = appDefaultAddress!.address??'';
+      _postalCodeController.text = appDefaultAddress!.postal_code??'';
+      _phoneController.text = appDefaultAddress!.phone??'';
+      _countryController.text = appDefaultAddress!.country_name??'';
+      _cityController.text = appDefaultAddress!.city_name??'';
+      _stateController.text = appDefaultAddress!.state_name??'';
+
+      _selected_country = Country(id:appDefaultAddress!.country_id,name: appDefaultAddress!.country_name);
+      _selected_city = City(id:appDefaultAddress!.city_id,name: appDefaultAddress!.city_name,state_id: appDefaultAddress!.state_id);
+      _selected_state = MyState(id:appDefaultAddress!.state_id,name: appDefaultAddress!.state_name,country_id: appDefaultAddress!.country_id);
+
+      setState(() {
+
+      });
+      /*TextEditingController _addressController = TextEditingController();
+      TextEditingController _nameController = TextEditingController();
+      TextEditingController _emailController = TextEditingController();
+      TextEditingController _postalCodeController = TextEditingController();
+      TextEditingController _phoneController = TextEditingController();
+      TextEditingController _cityController = TextEditingController();
+      TextEditingController _stateController = TextEditingController();
+      TextEditingController _countryController = TextEditingController();*/
+    }
+  }
+
   onSelectCountryDuringAdd(country) {
     if (_selected_country != null && country.id == _selected_country!.id) {
       setState(() {

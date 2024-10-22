@@ -225,6 +225,10 @@ class _CartState extends State<Cart> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return GuestCheckoutAddress();
           }));
+
+        /*  AIZRoute.push(context, SelectAddress()).then((value) {
+            onPopped(value);
+          });*/
         } else {
           AIZRoute.push(context, SelectAddress()).then((value) {
             onPopped(value);

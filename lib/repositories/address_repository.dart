@@ -15,9 +15,15 @@ import 'package:active_ecommerce_flutter/data_model/state_response.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/middlewares/banned_user.dart';
 import 'package:active_ecommerce_flutter/repositories/api-request.dart';
+import 'package:collection/collection.dart'; // You have to add this manually, for some reason it cannot be added automatically
 
 class AddressRepository {
   Future<dynamic> getAddressList() async {
+    if(!is_logged_in.$){
+      print(appDefaultAddress?.address);
+      return AddressResponse(addresses: appDefaultAddress==null?[]:[appDefaultAddress!],success: true,status: 200);
+    }
+
     String url = ("${AppConfig.BASE_URL}/user/shipping/address");
     final response = await ApiRequest.get(
       url: url,
@@ -28,6 +34,29 @@ class AddressRepository {
       },
     );
     return addressResponseFromJson(response.body);
+  }
+
+
+  Future<Address?> getDefaultAddress() async {
+    if(is_logged_in.$){
+
+      String url = ("${AppConfig.BASE_URL}/user/shipping/address");
+      final response = await ApiRequest.get(
+        url: url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${access_token.$}",
+          "App-Language": app_language.$!,
+        },
+      );
+      return addressResponseFromJson(response.body).addresses!.firstWhereOrNull((element) => element.set_default == 1);;
+    }
+
+    else{
+      Address? a=  await readAddress();
+      return a;
+    }
+
   }
 
   Future<dynamic> getHomeDeliveryAddress() async {
@@ -71,6 +100,8 @@ class AddressRepository {
       body: post_body,
       middleware: BannedUser(),
     );
+
+    saveAddress(null);
     return addressAddResponseFromJson(response.body);
   }
 

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:active_ecommerce_flutter/custom/aiz_route.dart';
 import 'package:active_ecommerce_flutter/helpers/main_helpers.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/other_config.dart';
@@ -9,6 +10,7 @@ import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
 import 'package:active_ecommerce_flutter/presenter/currency_presenter.dart';
 import 'package:active_ecommerce_flutter/presenter/unRead_notification_counter.dart';
 import 'package:active_ecommerce_flutter/providers/locale_provider.dart';
+import 'package:active_ecommerce_flutter/repositories/address_repository.dart';
 import 'package:active_ecommerce_flutter/screens/all_routes.dart';
 import 'package:active_ecommerce_flutter/screens/auction/auction_bidded_products.dart';
 import 'package:active_ecommerce_flutter/screens/auction/auction_products.dart';
@@ -46,11 +48,35 @@ import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
 
 import 'app_config.dart';
+import 'data_model/address_response.dart';
 import 'lang_config.dart';
+
+
+bool getEnableAddressFilter(){
+
+  print('geo is unknown');
+
+  bool enableAddressFilter = geoLocation.$;//true;
+
+  print('geo is ${enableAddressFilter.toString()}');
+
+  return enableAddressFilter;
+
+}
+checkAddress()async{
+  Address? a = await AddressRepository().getDefaultAddress().then((value) {
+    print(value==null?"address is null":'address is${value.address}');
+
+  },);
+
+
+}
 
 main() async {
   print("open");
   WidgetsFlutterBinding.ensureInitialized();
+
+
   FlutterDownloader.initialize(
       debug: true,
       // optional: set to false to disable printing logs to console (default: true)

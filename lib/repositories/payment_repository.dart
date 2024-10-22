@@ -38,13 +38,22 @@ class PaymentRepository {
     var post_body = jsonEncode({"payment_type": "$payment_method"});
 
     String url = ("${AppConfig.BASE_URL}/order/store");
+    Map<String,String> headerMap = {};
+
+    if(appDefaultAddress!=null){
+      headerMap['country_id']=appDefaultAddress!.country_id.toString();
+      headerMap['city_id']=appDefaultAddress!.city_id.toString();
+      headerMap['state_id']=appDefaultAddress!.state_id.toString();
+    }
+
+
     final response = await ApiRequest.post(
         url: url,
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer ${access_token.$}",
           "App-Language": app_language.$!,
-        },
+        }..addAll(headerMap),
         body: post_body,
         middleware: BannedUser());
 

@@ -9,6 +9,15 @@ class BusinessSettingHelper {
 
     businessLists.data!.forEach((element) {
       switch (element.type) {
+        case 'geo_location':
+          {
+            if (element.value.toString() == "1") {
+              geoLocation.$ = true;
+            } else {
+              geoLocation.$ = false;
+            }
+          }
+          break;
         case 'facebook_login':
           {
             if (element.value.toString() == "1") {

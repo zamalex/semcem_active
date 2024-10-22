@@ -24,6 +24,7 @@ import 'package:active_ecommerce_flutter/screens/digital_product/digital_product
 import 'package:active_ecommerce_flutter/screens/digital_product/purchased_digital_produts.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:active_ecommerce_flutter/screens/followed_sellers.dart';
+import 'package:active_ecommerce_flutter/screens/index.dart';
 import 'package:active_ecommerce_flutter/screens/notification/notification_list.dart';
 import 'package:active_ecommerce_flutter/screens/orders/order_list.dart';
 import 'package:active_ecommerce_flutter/screens/product/last_view_product.dart';
@@ -34,6 +35,8 @@ import 'package:active_ecommerce_flutter/screens/uploads/upload_file.dart';
 import 'package:active_ecommerce_flutter/screens/wallet.dart';
 import 'package:active_ecommerce_flutter/screens/wishlist.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -174,7 +177,13 @@ class _ProfileState extends State<Profile> {
 
   onTapLogout(BuildContext context) async {
     AuthHelper().clearUserData();
-    context.go("/");
+ //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Index(),));
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => Index()),
+            (Route<dynamic> route) => true);
+    //context.go("/");
+    saveAddress(null);
+    appDefaultAddress= null;
   }
 
   @override

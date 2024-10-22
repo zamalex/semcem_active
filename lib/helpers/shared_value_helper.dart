@@ -1,6 +1,61 @@
+import 'dart:convert';
+
 import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_value/shared_value.dart';
 
+import '../data_model/address_response.dart';
+
+
+
+ SharedPreferences? sharedPreferences;
+Address? appDefaultAddress;
+
+ initPrefs()async{
+  sharedPreferences = await SharedPreferences.getInstance();
+}
+
+
+
+
+
+ saveAddress(Address? loginModel)async{
+  if(sharedPreferences==null)
+    await initPrefs();
+
+  appDefaultAddress = loginModel;
+  if(loginModel==null)
+{
+  await sharedPreferences!.remove('address',);
+
+}else{
+    await sharedPreferences!.setString('address',jsonEncode(loginModel.toJson()));
+
+    print('address saved');
+  }
+
+}
+
+
+
+
+
+
+
+
+
+ Future<Address?> readAddress()async{
+if(sharedPreferences==null)
+await initPrefs();
+
+String? s = await sharedPreferences!.getString('address');
+
+if(s==null)
+return null;
+
+
+return Address.fromJson(jsonDecode(s));
+}
 final SharedValue<bool> is_logged_in = SharedValue(
   value: false, // initial value
   key: "is_logged_in", // disk storage key for shared_preferences
@@ -163,4 +218,10 @@ final SharedValue<String> guestEmail = SharedValue(
 final SharedValue<String> notificationShowType = SharedValue(
   value: "", // initial value
   key: "notification_show_type", // disk storage key for shared_preferences
+);
+
+
+final SharedValue<bool> geoLocation = SharedValue(
+  value: true, // initial value
+  key: "geo_location", // disk storage key for shared_preferences
 );

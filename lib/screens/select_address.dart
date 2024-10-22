@@ -27,7 +27,7 @@ class _SelectAddressState extends State<SelectAddress> {
   ScrollController _mainScrollController = ScrollController();
 
   // integer type variables
-  int? _seleted_shipping_address = 0;
+  int? _seleted_shipping_address = -1;
 
   // list type variables
   List<dynamic> _shippingAddressList = [];
@@ -51,6 +51,10 @@ class _SelectAddressState extends State<SelectAddress> {
     if (is_logged_in.$ == true) {
       fetchShippingAddressList();
       //fetchPickupPoints();
+    }
+    else{
+      fetchShippingAddressList();
+
     }
     setState(() {});
   }
@@ -78,7 +82,7 @@ class _SelectAddressState extends State<SelectAddress> {
   reset() {
     _shippingAddressList.clear();
     _faceData = false;
-    _seleted_shipping_address = 0;
+    _seleted_shipping_address = -1;
   }
 
   Future<void> _onRefresh() async {
@@ -103,7 +107,7 @@ class _SelectAddressState extends State<SelectAddress> {
   onPressProceed(context) async {
 
 
-    if (_seleted_shipping_address == 0) {
+    if (_seleted_shipping_address == -1) {
       ToastComponent.showDialog(
           LangText(context).local!.choose_an_address_or_pickup_point,
           gravity: Toast.center,
@@ -113,7 +117,7 @@ class _SelectAddressState extends State<SelectAddress> {
 
     late var addressUpdateInCartResponse;
 
-    if (_seleted_shipping_address != 0) {
+    if (_seleted_shipping_address != -1) {
       print(_seleted_shipping_address.toString() + "dddd");
       addressUpdateInCartResponse = await AddressRepository()
           .getAddressUpdateInCartResponse(
@@ -143,9 +147,13 @@ class _SelectAddressState extends State<SelectAddress> {
 
   @override
   void initState() {
+    print('select address');
     // TODO: implement initState
     super.initState();
     if (is_logged_in.$ == true) {
+      fetchAll();
+    }
+    else{
       fetchAll();
     }
   }
@@ -263,7 +271,7 @@ class _SelectAddressState extends State<SelectAddress> {
   }
 
   buildShippingInfoList() {
-    if (is_logged_in.$ == false) {
+  /*  if (is_logged_in.$ == false) {
       return Container(
           height: 100,
           child: Center(
@@ -271,7 +279,7 @@ class _SelectAddressState extends State<SelectAddress> {
                 LangText(context).local!.you_need_to_log_in,
                 style: TextStyle(color: MyTheme.font_grey),
               )));
-    } else if (!_faceData && _shippingAddressList.length == 0) {
+    } else*/ if (!_faceData && _shippingAddressList.length == 0) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildListShimmer(item_count: 5, item_height: 100.0));
@@ -360,7 +368,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 200,
             child: Text(
-              _shippingAddressList[index].phone,
+              _shippingAddressList[index].phone??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
@@ -389,7 +397,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 200,
             child: Text(
-              _shippingAddressList[index].postal_code,
+              _shippingAddressList[index].postal_code??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
@@ -418,7 +426,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 200,
             child: Text(
-              _shippingAddressList[index].country_name,
+              _shippingAddressList[index].country_name??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
@@ -447,7 +455,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 200,
             child: Text(
-              _shippingAddressList[index].state_name,
+              _shippingAddressList[index].state_name??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
@@ -476,7 +484,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 200,
             child: Text(
-              _shippingAddressList[index].city_name,
+              _shippingAddressList[index].city_name??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
@@ -505,7 +513,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 175,
             child: Text(
-              _shippingAddressList[index].address,
+              _shippingAddressList[index].address??'',
               maxLines: 2,
               style: TextStyle(
                   color: MyTheme.dark_grey, fontWeight: FontWeight.w600),

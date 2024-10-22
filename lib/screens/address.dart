@@ -9,16 +9,22 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/repositories/address_repository.dart';
+import 'package:active_ecommerce_flutter/screens/index.dart';
 import 'package:active_ecommerce_flutter/screens/map_location.dart';
+import 'package:active_ecommerce_flutter/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_flutter/data_model/address_response.dart' as a;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
 class Address extends StatefulWidget {
-  Address({Key? key, this.from_shipping_info = false}) : super(key: key);
+  Address({Key? key, this.from_shipping_info = false,this.from_first=false}) : super(key: key);
   bool from_shipping_info;
+
+  bool from_first;
 
   @override
   _AddressState createState() => _AddressState();
@@ -56,10 +62,14 @@ class _AddressState extends State<Address> {
 
   @override
   void initState() {
+    print('address screen');
     // TODO: implement initState
     super.initState();
 
     if (is_logged_in.$ == true) {
+      fetchAll();
+    }
+    else{
       fetchAll();
     }
   }
@@ -266,6 +276,25 @@ class _AddressState extends State<Address> {
       return;
     }
 
+    if(!is_logged_in.$){
+      saveAddress(a.Address( address: address,
+          id: 0,
+          country_id: _selected_country!.id,
+          state_id: _selected_state!.id,
+          city_name: _selected_city!.name,
+          set_default: 1,
+          user_id: 0,
+          country_name: _selected_country!.name,
+          state_name: _selected_state!.name,
+          city_id: _selected_city!.id,
+          postal_code: postal_code,
+          phone: phone));
+
+
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Index(),));
+
+      return;
+    }
     var addressAddResponse = await AddressRepository().getAddressAddResponse(
         address: address,
         country_id: _selected_country!.id,
@@ -1351,9 +1380,29 @@ class _AddressState extends State<Address> {
 
   GestureDetector buildAddressItemCard(index) {
     return GestureDetector(
+      onTap: (){
+        if (_default_shipping_address != _shippingAddressList[index].id) {
+          onAddressSwitch(_shippingAddressList[index].id);
+
+          appDefaultAddress = _shippingAddressList[index];
+        }
+
+        if(widget.from_first){
+          context.push("/");
+
+        }
+      },
+
       onDoubleTap: () {
         if (_default_shipping_address != _shippingAddressList[index].id) {
           onAddressSwitch(_shippingAddressList[index].id);
+
+          appDefaultAddress = _shippingAddressList[index];
+        }
+
+        if(widget.from_first){
+          context.push("/");
+
         }
       },
       child: AnimatedContainer(
@@ -1392,7 +1441,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 175,
                           child: Text(
-                            _shippingAddressList[index].address,
+                            _shippingAddressList[index].address??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
@@ -1419,7 +1468,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 200,
                           child: Text(
-                            _shippingAddressList[index].city_name,
+                            _shippingAddressList[index].city_name??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
@@ -1446,7 +1495,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 200,
                           child: Text(
-                            _shippingAddressList[index].state_name,
+                            _shippingAddressList[index].state_name??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
@@ -1473,7 +1522,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 200,
                           child: Text(
-                            _shippingAddressList[index].country_name,
+                            _shippingAddressList[index].country_name??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
@@ -1500,7 +1549,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 200,
                           child: Text(
-                            _shippingAddressList[index].postal_code,
+                            _shippingAddressList[index].postal_code??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
@@ -1527,7 +1576,7 @@ class _AddressState extends State<Address> {
                         Container(
                           width: 200,
                           child: Text(
-                            _shippingAddressList[index].phone,
+                            _shippingAddressList[index].phone??'',
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,

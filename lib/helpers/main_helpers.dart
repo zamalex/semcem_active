@@ -18,7 +18,8 @@ String capitalize(String text){
     "Content-Type": "application/json",
     "App-Language": app_language.$!,
     "Accept": "application/json",
-    "System-Key":AppConfig.system_key
+    "System-Key":AppConfig.system_key,
+
   };
   Map<String,String> get authHeader=> {
     "Authorization": "Bearer ${access_token.$}"

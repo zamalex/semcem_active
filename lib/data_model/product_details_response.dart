@@ -61,6 +61,7 @@ class DetailedProduct {
     this.current_stock,
     this.unit,
     this.rating,
+    this.available,
     this.rating_count,
     this.earn_point,
     this.description,
@@ -80,6 +81,7 @@ class DetailedProduct {
   String? shop_slug;
   String? shop_name;
   String? shop_logo;
+  int? available;
   List<Photo>? photos;
   String? thumbnail_image;
   List<String>? tags;
@@ -116,6 +118,7 @@ class DetailedProduct {
         shop_slug: json["shop_slug"],
         shop_name: json["shop_name"],
         shop_logo: json["shop_logo"],
+        available: int.parse(json["available"].toString()),
         estShippingTime: json["est_shipping_time"],
         photos: List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
         thumbnail_image: json["thumbnail_image"],
@@ -156,6 +159,7 @@ class DetailedProduct {
         "shop_slug": shop_slug,
         "shop_name": shop_name,
         "shop_logo": shop_logo,
+        "available": available,
         "photos": List<dynamic>.from(photos!.map((x) => x.toJson())),
         "thumbnail_image": thumbnail_image,
         "tags": List<dynamic>.from(tags!.map((x) => x)),
